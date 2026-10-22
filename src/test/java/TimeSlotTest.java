@@ -16,4 +16,10 @@ public class TimeSlotTest {
         LocalDateTime end = LocalDateTime.of(2026, 10, 24, 11, 0);
         assertThrows(IllegalArgumentException.class, () -> new TimeSlot(start, end));
     }
+
+    @Test 
+    void rejectnullend(){
+        LocalDateTime start = LocalDateTime.of(2026, 10, 29, 9, 0);
+        assertThrows(IllegalArgumentException.class, () -> new TimeSlot(start, null));
+    }
 }
