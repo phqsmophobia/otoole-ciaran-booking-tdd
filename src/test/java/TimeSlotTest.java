@@ -78,4 +78,13 @@ public class TimeSlotTest {
         TimeSlot slot2 = new TimeSlot(start, end);
         assertEquals(slot1, slot2);
     }
+
+    @Test 
+    void testforequalhashcodes(){
+        LocalDateTime start = LocalDateTime.of(2026, 10, 24, 11, 30, 0);
+        LocalDateTime end = LocalDateTime.of(2026, 10, 24, 13, 30, 0);
+        TimeSlot slot1 = new TimeSlot(start, end);
+        TimeSlot slot2 = new TimeSlot(start, end);
+        assertEquals(slot1.hashCode(), slot2.hashCode());
+    }
 }
