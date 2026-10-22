@@ -19,6 +19,7 @@ public class BookingTest {
         assertThrows(IllegalArgumentException.class, () -> new Booking(null, "R1", slot));
     }
 
+    @Test
     void notallownulltimeslot() {
         assertThrows(IllegalArgumentException.class, () -> new Booking("alice", "R1", null) );
     }
