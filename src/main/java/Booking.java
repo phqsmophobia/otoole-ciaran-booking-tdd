@@ -1,17 +1,23 @@
 public class Booking {
 
+    private final String userID;
+    private final String roomID;
+    private final TimeSlot bookingslot;
     public Booking(String userId, String roomId, TimeSlot bookingslot) {
+        this.userID = userId;
+        this.roomID = roomId;
+        this.bookingslot = bookingslot;
     }
 
     public String getUserId() {
-        return null;
+        return userID;
     }
 
     public String getRoomId() {
-        return null;
+        return roomID;
     }
 
     public TimeSlot getSlot() {
-        return null;
+        return bookingslot;
     }
 }
