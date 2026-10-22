@@ -35,13 +35,15 @@ public final class TimeSlot {
         if (this == o) {
             return true;
         }
-
         if (o == null || getClass() != o.getClass()) {
             return false;
         }
-
         TimeSlot other = (TimeSlot) o;
-
         return slotstart.equals(other.slotstart) && slotend.equals(other.slotend);
+    }
+
+    @Override 
+    public int hashCode(){
+        return Objects.hash(slotstart, slotend);
     }
 }
