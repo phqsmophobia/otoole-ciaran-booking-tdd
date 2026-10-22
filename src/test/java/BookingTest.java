@@ -12,4 +12,10 @@ public class BookingTest {
         assertEquals("R1", booktest.getRoomId());
         assertEquals(bookingslot, booktest.getSlot());
     }
+
+    @Test
+    void notallownulluserid() {
+        TimeSlot slot = new TimeSlot( LocalDateTime.of(2027, 1, 11, 10, 0), LocalDateTime.of(2027, 1, 11, 11, 0));
+        assertThrows(IllegalArgumentException.class, () -> new Booking(null, "R1", slot));
+    }
 }
