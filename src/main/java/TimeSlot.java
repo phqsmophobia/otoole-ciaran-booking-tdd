@@ -16,9 +16,16 @@ public final class TimeSlot {
 
     public Duration duration(){
             return Duration.between(slotstart,slotend);
-        }
+    }
 
     public boolean overlaps(TimeSlot other){
-        return false;
+        boolean OtherBefore = other.slotstart.isBefore(slotend); //other slot starts first
+        boolean BeforeOther = slotstart.isBefore(other.slotend); //this slot start first
+        if (OtherBefore && BeforeOther) {
+            return true; //this means they overlap
+        }
+        else {
+            return false; //dont overlap
+        }
     }
 }
