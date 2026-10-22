@@ -71,11 +71,11 @@ public class TimeSlotTest {
     }
 
     @Test 
-    void testforequalhashcodes(){
+    void testequaltimeslots(){
         LocalDateTime start = LocalDateTime.of(2026, 10, 24, 11, 30, 0);
         LocalDateTime end = LocalDateTime.of(2026, 10, 24, 13, 30, 0);
         TimeSlot slot1 = new TimeSlot(start, end);
         TimeSlot slot2 = new TimeSlot(start, end);
-        assertEquals(slot1.hashCode(), slot2.hashCode());
+        assertEquals(slot1, slot2);
     }
 }
