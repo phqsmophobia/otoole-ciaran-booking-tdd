@@ -28,4 +28,11 @@ class BookingServiceTest {
         Booking booking = service.book("alice", "R1", slot(10, 11));
         assertEquals(new Booking("alice", "R1", slot(10, 11)), booking);
     }
+
+    @Test 
+    void bookinganonexistingroom(){
+        Booking booking = service.book("alice", "R10", slot(13, 14));
+        //R1: Room R10 does not exist in the repository
+        assertThrows(IllegalArgumentException.class, () -> service.book("alice", "R10", slot(13, 14)));
+    }
 }
