@@ -23,4 +23,10 @@ public class BookingTest {
     void notallownulltimeslot() {
         assertThrows(IllegalArgumentException.class, () -> new Booking("alice", "R1", null) );
     }
+
+    @Test
+    void notallownullroomid() {
+        TimeSlot slot = new TimeSlot(LocalDateTime.of(2027, 1, 11, 10, 0), LocalDateTime.of(2027, 1, 11, 11, 0));
+        assertThrows(IllegalArgumentException.class, () -> new Booking("jerry", null, slot));
+    }
 }
