@@ -61,4 +61,12 @@ public class TimeSlotTest {
         assertEquals(expected, slot(aStart, aEnd).overlaps(slot(bStart, bEnd)));
         assertEquals(expected, slot(bStart, bEnd).overlaps(slot(aStart, aEnd)));
     }
+
+    @Test 
+    void aoverlapsbisequaltoboverlapsa(){
+        //create 2 slots that overlap
+        TimeSlot slot1 = new TimeSlot(LocalDateTime.of(2026,10,12,8,0,0), LocalDateTime.of(2026,10,12,10,0,0));
+        TimeSlot slot2 = new TimeSlot(LocalDateTime.of(2026,10,12,9,0,0), LocalDateTime.of(2026,10,12,11,0,0));
+        assertEquals(slot1.overlaps(slot2), slot2.overlaps(slot1));
+    }
 }

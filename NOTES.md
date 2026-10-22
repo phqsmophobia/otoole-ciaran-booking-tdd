@@ -14,6 +14,7 @@
 - What was wrong: No tests had been generated for these methods and the AI was jumping way ahead in steps, violating TDD.
 - The test that caught it: No specific test, I identified the error as it went against TDD workflow.
 
+
 ### 2 Incorrectly Suggested A Gap
 - What I asked: I was discussing the notes formatting gaps.
 - What it produced: It suggested that start and end being equal should be included, however the spec states ** end must be strictly after start **
