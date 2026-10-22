@@ -7,6 +7,10 @@ public class Booking {
         if (userId == null) {
             throw new IllegalArgumentException("User id cannot be null");
         }
+
+        if (bookingslot == null) {
+            throw new IllegalArgumentException("Booking time slot cannot be null");
+        }
         this.userID = userId;
         this.roomID = roomId;
         this.bookingslot = bookingslot;
