@@ -16,6 +16,6 @@
 
 ### 2 Incorrectly Suggested A Gap
 - What I asked: I was discussing the notes formatting gaps.
-- What it produced: It suggested that start and end being equal should be included, however the spec states ** end must be strictly after start **
+- What it produced: It suggested that start and end being equal should be included, however the spec states **end must be strictly after start**
 - What was wrong: A1 states end must be strictly after start.
 - The test that caught it: rejectstartequalsend(), however this only occured as the Ai lacked full knowledge of the spec and overlooked my phrasing of A1.
