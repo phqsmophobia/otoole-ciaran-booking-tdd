@@ -10,4 +10,9 @@ public class RoomTest {
         assertEquals("R1", room.getId());
         assertEquals("Room 1", room.getName());
     }
+
+    @Test
+    void roomnotallowednull() {
+        assertThrows(IllegalArgumentException.class, () -> {new Room("R1", null);});
+    }
 }
