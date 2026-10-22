@@ -29,7 +29,7 @@
 - The test that caught it: It was required to pass the testequaltimeslots() test.
 
 ### 4 Assisted in creation of equals in booking class
-What I asked: I asked for help understanding why my bookingAFreeRoomReturnsTheBooking() test was failing when comparing the two objects.
-What it produced: It suggested overriding the equals() method in Booking.java to compare the userId, roomId and slot fields and generated the code.
-What was wrong: Java's default equals() method compares object identity rather than the contents of the two bookings.
+What I asked: I asked for help understanding why my bookingAFreeRoomReturnsTheBooking() test was failing when comparing the two objects.  \
+What it produced: It suggested overriding the equals() method in Booking.java to compare the userId, roomId and slot fields and generated the code.  \
+What was wrong: Java's default equals() method compares object identity rather than the contents of the two bookings.  \
 The test that caught it: bookingAFreeRoomReturnsTheBooking() in BookingServiceTest.java.
