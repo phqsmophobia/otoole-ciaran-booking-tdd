@@ -1,6 +1,6 @@
 # otoole-ciaran-booking-tdd
 
-Commands \
+**Commands** \
 javac -d out -cp junit.jar src/main/java/*.java src/test/java/*.java
 
 
