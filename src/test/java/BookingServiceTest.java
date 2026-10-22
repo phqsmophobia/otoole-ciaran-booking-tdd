@@ -34,4 +34,15 @@ class BookingServiceTest {
         //R1: Room R10 does not exist in the repository
         assertThrows(IllegalArgumentException.class, () -> service.book("alice", "R10", slot(13, 14)));
     }
+
+    @Test 
+    void slotinthefuture(){
+        TimeSlot past= slot(8, 9);
+        Booking pasttimeslotbooked = new Booking("alice", "R1", past);
+        assertThrows(IllegalArgumentException.class, () -> service.book(
+            pasttimeslotbooked.getUserId(),
+            pasttimeslotbooked.getRoomId(),
+            pasttimeslotbooked.getSlot()
+        ));
+    }
 }
