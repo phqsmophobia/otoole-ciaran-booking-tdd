@@ -30,6 +30,14 @@ public final class TimeSlot {
         }
     }
 
+    public LocalDateTime getStart() {
+        return slotstart;
+    }
+
+    public LocalDateTime getEnd() {
+        return slotend;
+    }
+
     @Override
     public boolean equals(Object o){
         if (this == o) {
