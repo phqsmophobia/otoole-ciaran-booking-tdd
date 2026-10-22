@@ -8,4 +8,9 @@ public final class TimeSlot {
             throw new IllegalArgumentException("start and end cannot be null, and end must be after start.");
         }
     }
+
+    public Duration duration() {
+        //stub
+            return Duration.ofMinutes(0);
+        }
 }

@@ -28,4 +28,12 @@ public class TimeSlotTest {
         LocalDateTime end = LocalDateTime.of(2026, 10, 29, 9, 0);
         assertThrows(IllegalArgumentException.class, () -> new TimeSlot(null, end));
     }
+
+    @Test 
+    void calculatetimebetweenstartandend(){
+        LocalDateTime start = LocalDateTime.of(2026,10,12,11,0);
+        LocalDateTime end = LocalDateTime.of(2026,10,12,12,30);
+        TimeSlot timeslot = new TimeSlot(start, end);
+        assertEquals(90, timeslot.duration().toMinutes());
+    }
 }
