@@ -22,13 +22,13 @@ public class TimeSlotTest {
 
     @Test 
     void rejectnullend(){
-        LocalDateTime start = LocalDateTime.of(2026, 10, 29, 9, 0);
+        LocalDateTime start = LocalDateTime.of(2026,10,29,9,0);
         assertThrows(IllegalArgumentException.class, () -> new TimeSlot(start, null));
     }
 
     @Test 
     void rejectnullstart(){
-        LocalDateTime end = LocalDateTime.of(2026, 10, 29, 9, 0);
+        LocalDateTime end = LocalDateTime.of(2026,10,29,9,0);
         assertThrows(IllegalArgumentException.class, () -> new TimeSlot(null, end));
     }
 
@@ -68,5 +68,14 @@ public class TimeSlotTest {
         TimeSlot slot1 = new TimeSlot(LocalDateTime.of(2026,10,12,8,0,0), LocalDateTime.of(2026,10,12,10,0,0));
         TimeSlot slot2 = new TimeSlot(LocalDateTime.of(2026,10,12,9,0,0), LocalDateTime.of(2026,10,12,11,0,0));
         assertEquals(slot1.overlaps(slot2), slot2.overlaps(slot1));
+    }
+
+    @Test 
+    void testforequalhashcodes(){
+        LocalDateTime start = LocalDateTime.of(2026, 10, 24, 11, 30, 0);
+        LocalDateTime end = LocalDateTime.of(2026, 10, 24, 13, 30, 0);
+        TimeSlot slot1 = new TimeSlot(start, end);
+        TimeSlot slot2 = new TimeSlot(start, end);
+        assertEquals(slot1.hashCode(), slot2.hashCode());
     }
 }
