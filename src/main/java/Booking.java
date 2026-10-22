@@ -32,4 +32,17 @@ public class Booking {
     public TimeSlot getSlot() {
         return bookingslot;
     }
+
+    @Override
+    public boolean equals(Object obj) {
+        //if they are both the same object then return trun
+        if (this == obj) return true;
+
+        // If the object isn't a Booking, they can't be equal
+        if (!(obj instanceof Booking)) return false;
+        //convert other to a booking to access its fields
+        Booking other = (Booking) obj;
+        // bookings are equal only if the user, room and time slot all match
+        return java.util.Objects.equals(userID, other.userID) && java.util.Objects.equals(roomID, other.roomID) && java.util.Objects.equals(bookingslot, other.bookingslot);
+    }
 }
