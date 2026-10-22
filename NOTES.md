@@ -20,3 +20,10 @@
 - What it produced: It suggested that start and end being equal should be included, however the spec states **end must be strictly after start**.
 - What was wrong: A1 states end must be strictly after start.
 - The test that caught it: rejectstartequalsend(), however this only occured as the Ai lacked full knowledge of the spec and overlooked my phrasing of A1.
+
+
+### 3 Assisted in creating Equals
+- What I asked: I am struggling with the logic of the equals method, could you help?
+- What it produced: It suggested code that compares two TimeSlot objects using their start and end times.
+- What was wrong: nothing was wrong with the suggested implementation.
+- The test that caught it: It was required to pass the testequaltimeslots() test.

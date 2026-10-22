@@ -29,4 +29,19 @@ public final class TimeSlot {
             return false; //dont overlap
         }
     }
+
+    @Override
+    public boolean equals(Object o){
+        if (this == o) {
+            return true;
+        }
+
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+
+        TimeSlot other = (TimeSlot) o;
+
+        return slotstart.equals(other.slotstart) && slotend.equals(other.slotend);
+    }
 }
