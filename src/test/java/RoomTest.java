@@ -5,9 +5,9 @@ public class RoomTest {
     
     @Test
     void roomtakesanIDandName() {
-        Room room = new Room("1", "Room 1");
+        Room room = new Room("R1", "Room 1");
 
-        assertEquals("1", room.getId());
+        assertEquals("R1", room.getId());
         assertEquals("Room 1", room.getName());
     }
 }
