@@ -14,7 +14,6 @@ public final class TimeSlot {
         this.slotend = end;
     }
     public Duration duration() {
-        //stub
-            return Duration.ofMinutes(0);
+            return Duration.between(slotstart,slotend);
         }
 }
