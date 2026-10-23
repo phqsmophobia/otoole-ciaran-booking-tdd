@@ -14,13 +14,13 @@ public class BookingService {
         this.bookings = bookings;
         this.clock = clock;
 
-        this.rules = List.of(new RoomExist(rooms));
+        this.rules = List.of(new RoomExist(rooms),new SlotFuture(clock));
     }
 
     /** Book a room for a user. Returns the new booking. */
     public Booking book(String userId, String roomId, TimeSlot slot) {
         rules.get(0).check(userId, roomId, slot);
-        checkifslotinfuture(userId, roomId, slot);
+        rules.get(1).check(userId, roomId, slot);
         checkduration(userId, roomId, slot);
         checknooverlaprooms(userId, roomId, slot);
         checknooverlapuser(userId, roomId, slot);
