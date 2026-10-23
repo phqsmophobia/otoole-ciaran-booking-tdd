@@ -29,6 +29,12 @@ public class BookingService {
             throw new IllegalArgumentException("Booking cannot exceed 3 hours");
         }
 
+        for(Booking e : bookings.findByRoom(roomId)){
+            if(e.getSlot().overlaps(slot)){
+                throw new IllegalStateException("Room cannot have overlapping bookings");
+            }
+        }
+
         Booking booking = new Booking(userId, roomId, slot);
         bookings.save(booking);
         return booking;
