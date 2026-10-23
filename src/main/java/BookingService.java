@@ -18,9 +18,7 @@ public class BookingService {
     public Booking book(String userId, String roomId, TimeSlot slot) {
         checkroomexistence(userId, roomId, slot);
         checkifslotinfuture(userId, roomId, slot);
-        if(slot.duration().compareTo(MAX_SLOT)>0){
-            throw new IllegalArgumentException("Booking cannot exceed 3 hours");
-        }
+        checkduration(userId, roomId, slot);
 
         for(Booking e : bookings.findByRoom(roomId)){
             if(e.getSlot().overlaps(slot)){
@@ -49,6 +47,12 @@ public class BookingService {
     private void checkifslotinfuture(String userId, String roomId, TimeSlot slot){
         if(slot.getStart().isBefore(LocalDateTime.now(clock))){
             throw new IllegalArgumentException("Booking slot must be for future time slots.");
+        }
+    }
+
+    private void checkduration(String userId, String roomId, TimeSlot slot) {
+        if (slot.duration().compareTo(MAX_SLOT) > 0) {
+            throw new IllegalArgumentException("Booking cannot exceed 3 hours");
         }
     }
 
