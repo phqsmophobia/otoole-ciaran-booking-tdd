@@ -19,13 +19,13 @@ public class BookingService {
 
     /** Book a room for a user. Returns the new booking. */
     public Booking book(String userId, String roomId, TimeSlot slot) {
-        rules.get(0).check(userId, roomId, slot);
-        rules.get(1).check(userId, roomId, slot);
-        rules.get(2).check(userId, roomId, slot);
-        rules.get(3).check(userId, roomId, slot);
-        rules.get(4).check(userId, roomId, slot);
+        // Check every booking rule in order.
+        for (BookingRule rule : rules) {
+            rule.check(userId, roomId, slot);
+        }
 
         Booking booking = new Booking(userId, roomId, slot);
+        //save booking
         bookings.save(booking);
         return booking;
     }
