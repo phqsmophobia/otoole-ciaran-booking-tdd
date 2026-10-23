@@ -81,4 +81,13 @@ class BookingServiceTest {
         TimeSlot timeslot = slot(18,19);
         assertThrows(IllegalArgumentException.class, () -> service.cancel("alice", "R1", timeslot));
     }
+
+    @Test 
+    void cancelbookingwillfreetheslot(){
+        TimeSlot timeslot = slot(16,18);
+        service.book("alice", "R2", timeslot);
+        service.cancel("alice", "R2", timeslot);
+        Booking sameslotbook = service.book("Bob", "R2", timeslot);
+        assertEquals(new Booking("Bob", "R2", timeslot),sameslotbook);
+    }
 }
