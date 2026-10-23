@@ -141,4 +141,12 @@ class BookingServiceTest {
         service.book(book3.getUserId(),book3.getRoomId(),book3.getSlot());
         assertThrows(IllegalStateException.class, () -> service.book(book4.getUserId(),book4.getRoomId(),book4.getSlot()));
     }
+
+    @Test 
+    void bookingcantbe14daysinfuture(){
+        LocalDateTime start = LocalDateTime.now(CLOCK);
+        LocalDateTime end = LocalDateTime.now(CLOCK);
+        assertThrows(IllegalArgumentException.class, () -> service.book("alice", "R1", slot(start.getHour()+336,end.getHour()+337)));
+        
+    }
 }
