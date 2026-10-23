@@ -35,6 +35,12 @@ public class BookingService {
             }
         }
 
+        for(Booking e : bookings.findByUser(userId)){
+            if(e.getSlot().overlaps(slot)){
+                throw new IllegalStateException("User cannot book 2 rooms at the same time");
+            }
+        }
+
         Booking booking = new Booking(userId, roomId, slot);
         bookings.save(booking);
         return booking;
