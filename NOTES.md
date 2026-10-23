@@ -4,7 +4,10 @@
 
 | Rule | What was unclear | Ruling | My test for it |
 | ---- | ---------------- | ------ | -------------- |
-| R?   |                  |        |                |
+|  A1  | if seconds are allowed |  no   | dont allow them |
+|  R2  | if a slot starting now is allowed | no | must be in the future, slotinthefuture() |
+|  R6  | if part of a timeslot can be cancelled | no | must be fully cancelled, cancelbookingwillfreetheslot() |
+| booking | if null booking is allowed | no | notallownulltimeslot(), notallownullroomid(), notallownulluserid() |
 
 ## AI corrections (at least three)
 
