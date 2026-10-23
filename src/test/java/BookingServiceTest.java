@@ -37,6 +37,7 @@ class BookingServiceTest {
 
     @Test 
     void slotinthefuture(){
+        //R2
         TimeSlot past= slot(8, 9);
         Booking pasttimeslotbooked = new Booking("alice", "R1", past);
         assertThrows(IllegalArgumentException.class, () -> service.book(
@@ -44,5 +45,13 @@ class BookingServiceTest {
             pasttimeslotbooked.getRoomId(),
             pasttimeslotbooked.getSlot()
         ));
+    }
+
+    @Test 
+    void maximum3hourslot(){
+        //R3 booking cannot be longer than 3 hours
+        TimeSlot longerthan3 = slot(10,14);
+        Booking longer = new Booking("alice","R1",longerthan3);
+        assertThrows(IllegalArgumentException.class, () -> service.book(longer.getUserId(),longer.getRoomId(),longer.getSlot()));
     }
 }
