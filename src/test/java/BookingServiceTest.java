@@ -109,4 +109,11 @@ class BookingServiceTest {
         Booking booktest = service.book("alice", "R2", time);
         assertEquals(new Booking("alice", "R2", time), booktest);
     }
-}
+
+    @Test
+    void touchingslotsinthesameroomareallowed(){
+        service.book("alice","R1",slot(10,11));
+        Booking s = service.book("bob","R1",slot(11,12));
+        assertEquals(new Booking("bob", "R1", slot(11, 12)), s);
+    }
+    }
