@@ -75,4 +75,10 @@ class BookingServiceTest {
         service.book(book1.getUserId(),book1.getRoomId(),book1.getSlot());
         assertThrows(IllegalStateException.class, () -> service.book(book2.getUserId(),book2.getRoomId(),book2.getSlot()));
     }
+
+    @Test 
+    void cancelnonexistingbooking(){
+        TimeSlot timeslot = slot(18,19);
+        assertThrows(IllegalArgumentException.class, () -> service.cancel("alice", "R1", timeslot));
+    }
 }
