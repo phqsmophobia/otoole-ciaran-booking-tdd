@@ -54,4 +54,14 @@ class BookingServiceTest {
         Booking longer = new Booking("alice","R1",longerthan3);
         assertThrows(IllegalArgumentException.class, () -> service.book(longer.getUserId(),longer.getRoomId(),longer.getSlot()));
     }
+
+    @Test 
+    void bookingcanthave2overlapping(){
+        TimeSlot ts1 = slot(10,12);
+        TimeSlot ts2 = slot(11,13);
+        Booking book1 = new Booking("alice","R1",ts1);
+        Booking book2 = new Booking("Bob","R1",ts2);
+        service.book(book1.getUserId(),book1.getRoomId(),book1.getSlot());
+        assertThrows(IllegalStateException.class, () -> service.book(book2.getUserId(),book2.getRoomId(),book2.getSlot()));
+    }
 }
