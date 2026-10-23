@@ -17,10 +17,7 @@ public class BookingService {
     /** Book a room for a user. Returns the new booking. */
     public Booking book(String userId, String roomId, TimeSlot slot) {
         checkroomexistence(userId, roomId, slot);
-        if(slot.getStart().isBefore(LocalDateTime.now(clock))){
-            throw new IllegalArgumentException("Booking slot must be for future time slots.");
-        }
-
+        checkifslotinfuture(userId, roomId, slot);
         if(slot.duration().compareTo(MAX_SLOT)>0){
             throw new IllegalArgumentException("Booking cannot exceed 3 hours");
         }
@@ -46,6 +43,12 @@ public class BookingService {
         Room room = rooms.findById(roomId);
         if (room == null) {
             throw new IllegalArgumentException("Room is not available as it does not exist.");
+        }
+    }
+
+    private void checkifslotinfuture(String userId, String roomId, TimeSlot slot){
+        if(slot.getStart().isBefore(LocalDateTime.now(clock))){
+            throw new IllegalArgumentException("Booking slot must be for future time slots.");
         }
     }
 
