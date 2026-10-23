@@ -90,4 +90,16 @@ class BookingServiceTest {
         Booking sameslotbook = service.book("Bob", "R2", timeslot);
         assertEquals(new Booking("Bob", "R2", timeslot),sameslotbook);
     }
+
+    @Test 
+    void bookingsforreturnsbookingsforauserinorder(){
+        service.book("alice", "R1", slot(14,15));
+        service.book("alice", "R1", slot(10,11));
+        List<Booking> alicelist = service.bookingsFor("alice");
+
+        assertEquals(2,alicelist.size()); //ensure there is the correct amount of bookings
+        //ensure they are presented in the correct order depending on times
+        assertEquals(slot(10,11),alicelist.get(0).getSlot());
+        assertEquals(slot(14,15),alicelist.get(1).getSlot());
+    }
 }
