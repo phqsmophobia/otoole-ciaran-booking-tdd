@@ -116,4 +116,13 @@ class BookingServiceTest {
         Booking s = service.book("bob","R1",slot(11,12));
         assertEquals(new Booking("bob", "R1", slot(11, 12)), s);
     }
+
+    @Test
+    void sameusersameslotdifferentroom() {
+        // Boundary test: R5 rejects overlapping bookings for the same user
+        TimeSlot slotted = slot(10, 11);
+
+        service.book("alice", "R1", slotted);
+        assertThrows(IllegalStateException.class, () -> service.book("alice", "R2", slotted));
     }
+}
