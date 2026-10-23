@@ -125,4 +125,20 @@ class BookingServiceTest {
         service.book("alice", "R1", slotted);
         assertThrows(IllegalStateException.class, () -> service.book("alice", "R2", slotted));
     }
+
+    @Test 
+    void usercanhavemax3bookings(){
+        TimeSlot ts1 = slot(10,11);
+        TimeSlot ts2 = slot(12,13);
+        TimeSlot ts3 = slot(14,15);
+        TimeSlot ts4 = slot(16,17);
+        Booking book1 = new Booking("alice","R1",ts1);
+        Booking book2 = new Booking("alice","R2",ts2);
+        Booking book3 = new Booking("alice","R1",ts3);
+        Booking book4 = new Booking("alice","R2",ts4);
+        service.book(book1.getUserId(),book1.getRoomId(),book1.getSlot());
+        service.book(book2.getUserId(),book2.getRoomId(),book2.getSlot());
+        service.book(book3.getUserId(),book3.getRoomId(),book3.getSlot());
+        assertThrows(IllegalStateException.class, () -> service.book(book4.getUserId(),book4.getRoomId(),book4.getSlot()));
+    }
 }
