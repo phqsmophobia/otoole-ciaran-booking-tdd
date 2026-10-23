@@ -6,17 +6,20 @@ public class BookingService {
 
     private final IRoomRepository rooms;
     private final IBookingRepository bookings;
+    private final List<BookingRule> rules;
     private final Clock clock;
 
     public BookingService(IRoomRepository rooms, IBookingRepository bookings, Clock clock) {
         this.rooms = rooms;
         this.bookings = bookings;
         this.clock = clock;
+
+        this.rules = List.of(new RoomExist(rooms));
     }
 
     /** Book a room for a user. Returns the new booking. */
     public Booking book(String userId, String roomId, TimeSlot slot) {
-        checkroomexistence(userId, roomId, slot);
+        rules.get(0).check(userId, roomId, slot);
         checkifslotinfuture(userId, roomId, slot);
         checkduration(userId, roomId, slot);
         checknooverlaprooms(userId, roomId, slot);
@@ -25,13 +28,6 @@ public class BookingService {
         Booking booking = new Booking(userId, roomId, slot);
         bookings.save(booking);
         return booking;
-    }
-
-    private void checkroomexistence(String userId, String roomId, TimeSlot slot){
-        Room room = rooms.findById(roomId);
-        if (room == null) {
-            throw new IllegalArgumentException("Room is not available as it does not exist.");
-        }
     }
 
     private void checkifslotinfuture(String userId, String roomId, TimeSlot slot){
