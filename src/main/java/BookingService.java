@@ -25,6 +25,10 @@ public class BookingService {
             throw new IllegalArgumentException("Booking slot must be for future time slots.");
         }
 
+        if(slot.duration().compareTo(MAX_SLOT)>0){
+            throw new IllegalArgumentException("Booking cannot exceed 3 hours");
+        }
+
         Booking booking = new Booking(userId, roomId, slot);
         bookings.save(booking);
         return booking;
