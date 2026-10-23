@@ -23,7 +23,9 @@ public class BookingService {
         for (BookingRule rule : rules) {
             rule.check(userId, roomId, slot);
         }
-
+        if (bookings.findByUser(userId).size() >= 3) {
+            throw new IllegalStateException("cannot have more than 3 bookings");
+        }
         Booking booking = new Booking(userId, roomId, slot);
         //save booking
         bookings.save(booking);
