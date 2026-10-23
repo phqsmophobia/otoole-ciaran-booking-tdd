@@ -59,6 +59,10 @@ public class BookingService {
 
     /** A user's bookings, earliest first. */
     public List<Booking> bookingsFor(String userId) {
-        return null;
+        //memorybooking uses to list but we need it to be mutable not immutable which means we can change its order
+        List<Booking> userbooked = new java.util.ArrayList<>(bookings.findByUser(userId)); //find all their bookings
+        userbooked.sort((a,b) -> a.getSlot().getStart().compareTo(b.getSlot().getStart()));
+        return userbooked;
+
     }
 }
