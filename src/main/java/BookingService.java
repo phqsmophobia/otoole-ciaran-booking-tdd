@@ -14,50 +14,20 @@ public class BookingService {
         this.bookings = bookings;
         this.clock = clock;
 
-        this.rules = List.of(new RoomExist(rooms),new SlotFuture(clock));
+        this.rules = List.of(new RoomExist(rooms),new SlotFuture(clock),new ObeyMaxDuration(MAX_SLOT),new NoRoomOverlap(bookings),new NoUserOverlap(bookings));
     }
 
     /** Book a room for a user. Returns the new booking. */
     public Booking book(String userId, String roomId, TimeSlot slot) {
         rules.get(0).check(userId, roomId, slot);
         rules.get(1).check(userId, roomId, slot);
-        checkduration(userId, roomId, slot);
-        checknooverlaprooms(userId, roomId, slot);
-        checknooverlapuser(userId, roomId, slot);
+        rules.get(2).check(userId, roomId, slot);
+        rules.get(3).check(userId, roomId, slot);
+        rules.get(4).check(userId, roomId, slot);
 
         Booking booking = new Booking(userId, roomId, slot);
         bookings.save(booking);
         return booking;
-    }
-
-    private void checkifslotinfuture(String userId, String roomId, TimeSlot slot){
-        if(slot.getStart().isBefore(LocalDateTime.now(clock))){
-            throw new IllegalArgumentException("Booking slot must be for future time slots.");
-        }
-    }
-
-    private void checkduration(String userId, String roomId, TimeSlot slot) {
-        if (slot.duration().compareTo(MAX_SLOT) > 0) {
-            throw new IllegalArgumentException("Booking cannot exceed 3 hours");
-        }
-    }
-
-    private void checknooverlaprooms(String userId, String roomId, TimeSlot slot){
-        for(Booking e : bookings.findByRoom(roomId)){
-            if(e.getSlot().overlaps(slot)){
-                throw new IllegalStateException("Room cannot have overlapping bookings");
-            }
-        }
-    }
-
-    private void checknooverlapuser(String userId, String roomId, TimeSlot slot) {
-        for (Booking e : bookings.findByUser(userId)) {
-            if (e.getSlot().overlaps(slot)) {
-                throw new IllegalStateException(
-                    "User cannot book 2 rooms at the same time"
-                );
-            }
-        }
     }
 
     /** Cancel a user's booking. */
