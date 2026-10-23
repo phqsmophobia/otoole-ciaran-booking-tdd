@@ -20,12 +20,7 @@ public class BookingService {
         checkifslotinfuture(userId, roomId, slot);
         checkduration(userId, roomId, slot);
         checknooverlaprooms(userId, roomId, slot);
-
-        for(Booking e : bookings.findByUser(userId)){
-            if(e.getSlot().overlaps(slot)){
-                throw new IllegalStateException("User cannot book 2 rooms at the same time");
-            }
-        }
+        checknooverlapuser(userId, roomId, slot);
 
         Booking booking = new Booking(userId, roomId, slot);
         bookings.save(booking);
@@ -55,6 +50,16 @@ public class BookingService {
         for(Booking e : bookings.findByRoom(roomId)){
             if(e.getSlot().overlaps(slot)){
                 throw new IllegalStateException("Room cannot have overlapping bookings");
+            }
+        }
+    }
+
+    private void checknooverlapuser(String userId, String roomId, TimeSlot slot) {
+        for (Booking e : bookings.findByUser(userId)) {
+            if (e.getSlot().overlaps(slot)) {
+                throw new IllegalStateException(
+                    "User cannot book 2 rooms at the same time"
+                );
             }
         }
     }
