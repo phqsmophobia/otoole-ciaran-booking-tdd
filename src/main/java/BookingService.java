@@ -48,7 +48,13 @@ public class BookingService {
 
     /** Cancel a user's booking. */
     public void cancel(String userId, String roomId, TimeSlot slot) {
-        throw new UnsupportedOperationException("TODO: implement using TDD");
+        for(Booking e: bookings.findByUser(userId)){
+            if(e.getRoomId().equals(roomId)&&e.getSlot().equals(slot)){
+                bookings.delete(e);
+                return;
+            }
+        }
+        throw new IllegalArgumentException("booking does not exist");
     }
 
     /** A user's bookings, earliest first. */
