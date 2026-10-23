@@ -64,4 +64,15 @@ class BookingServiceTest {
         service.book(book1.getUserId(),book1.getRoomId(),book1.getSlot());
         assertThrows(IllegalStateException.class, () -> service.book(book2.getUserId(),book2.getRoomId(),book2.getSlot()));
     }
+
+    @Test 
+    void canthave2roomsbookedsametime(){
+        //R5 user cant have 2 bookings in 2 rooms at same time
+        TimeSlot ts1 = slot(10,11);
+        TimeSlot ts2 = slot(10,11);
+        Booking book1 = new Booking("alice","R1",ts1);
+        Booking book2 = new Booking("alice","R2",ts2);
+        service.book(book1.getUserId(),book1.getRoomId(),book1.getSlot());
+        assertThrows(IllegalStateException.class, () -> service.book(book2.getUserId(),book2.getRoomId(),book2.getSlot()));
+    }
 }
