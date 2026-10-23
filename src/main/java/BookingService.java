@@ -19,12 +19,7 @@ public class BookingService {
         checkroomexistence(userId, roomId, slot);
         checkifslotinfuture(userId, roomId, slot);
         checkduration(userId, roomId, slot);
-
-        for(Booking e : bookings.findByRoom(roomId)){
-            if(e.getSlot().overlaps(slot)){
-                throw new IllegalStateException("Room cannot have overlapping bookings");
-            }
-        }
+        checknooverlaprooms(userId, roomId, slot);
 
         for(Booking e : bookings.findByUser(userId)){
             if(e.getSlot().overlaps(slot)){
@@ -53,6 +48,14 @@ public class BookingService {
     private void checkduration(String userId, String roomId, TimeSlot slot) {
         if (slot.duration().compareTo(MAX_SLOT) > 0) {
             throw new IllegalArgumentException("Booking cannot exceed 3 hours");
+        }
+    }
+
+    private void checknooverlaprooms(String userId, String roomId, TimeSlot slot){
+        for(Booking e : bookings.findByRoom(roomId)){
+            if(e.getSlot().overlaps(slot)){
+                throw new IllegalStateException("Room cannot have overlapping bookings");
+            }
         }
     }
 
